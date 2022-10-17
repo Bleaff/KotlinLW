@@ -1,18 +1,20 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
-import com.google.android.material.textfield.TextInputLayout
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val inputText = findViewById<EditText>(R.id.UInput)
+        inputText.setText("Lorem ipsum dolor sit amet consectetur adipiscing elit Pellentesque vestibulum leo et turpis egestas id facilisis ante aliquam Nunc et mollis enim Duis mattis ut nisl at volutpat")
     }
     @SuppressLint("SetTextI18n")
     private fun processWords(list: MutableList<String>){
@@ -34,18 +36,18 @@ class MainActivity : AppCompatActivity() {
 
     fun onClickMagic(view:View){
         val multe = findViewById<TextView>(R.id.textView)
-        val inputText = findViewById<TextInputLayout>(R.id.UInput)
-        val set_of_words = inputText.editText?.text.toString()
+        val inputText = findViewById<EditText>(R.id.UInput)
+        val set_of_words = inputText.text.toString()
 
         multe.text = ""
 
-        if(set_of_words.length != 0){
+        if(set_of_words.isNotEmpty()){
             val row_processed_values = set_of_words.split(" ").toMutableList()
 
             Log.d("ButtonCheck", set_of_words)
 
             processWords(row_processed_values)
-            inputText.editText?.text!!.clear()
+            inputText.text!!.clear()
         }
     }
 }
